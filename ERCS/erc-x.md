@@ -1,6 +1,6 @@
 ---
 title: Non-Fungible Asset Bound Token Standard
-description: <Description is one full (short) sentence>
+description: An interface for Non-Fungible Asset Bound Tokens, also known as a NFABT.
 author: Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)
 discussions-to: <URL>
 status: Draft
