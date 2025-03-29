@@ -24,6 +24,14 @@ requires: <EIP number(s)> # Only required when you reference an EIP in the `Spec
 
 ## Abstract
 
+A standard interface for Non-Fungible Asset Bound Tokens (NFABT/s), a subset of the more general Asset Bound Tokens (ABT/s).
+
+The following standard allows for the implementation of a standard API for tokens within smart contracts and provides mirrored information of a specific smart contract through the ‘assetBoundContract’ function. Mirrored information consists of ‘ownerOf’, ‘tokenID’, ‘totalSupply’, as well as ‘balanceOf’. This in conjunction with blocking the ability to use basic transfer and approve functionality makes 2 tokens from different smart contracts interlocked. As the asset cannot be transferred in the traditional sense, being bound to a specific asset within a specific contract and maintaining corresponding information and movements creates an ABT. 
+
+As the asset is bound to another asset having specified mirrored information, a ‘reveal’ function replaces the mint function commonly seen. The total supply of all the tokens from the ABT smart contract already exists.
+
+We considered ABTs being used by every individual who wishes to link an additional non-fungible asset to an already existing non-fungible asset. ABTs allow an infinite amount of tokens to be bound together, allowing them to work symbiotically rather than splintering and separating. Remaining interlocked and asset bound removes the idea that 2 smart contracts released by the same or different creators at the same or different times are competing with one another.
+
 <!--
   The Abstract is a multi-sentence (short paragraph) technical summary. This should be a very terse and human-readable version of the specification section. Someone should be able to read only the abstract to get the gist of what this specification does.
 
