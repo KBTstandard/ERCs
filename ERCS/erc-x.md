@@ -1,10 +1,10 @@
 ---
-title: Non-Fungible Asset Bound Token Standard
+title: Non-Fungible PermaLink Asset Bound Token Standard
 description: An interface for Non-Fungible Asset Bound Tokens, also known as a NFABT.
 author: Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)
-discussions-to: <URL>
+discussions-to: <[URL](https://ethereum-magicians.org/t/non-fungible-asset-bound-token/23175)>
 status: Draft
-type: <Standards Track, Meta, or Informational>
+type: Standards Track
 category: <Core, Networking, Interface, or ERC> # Only required for Standards Track. Otherwise, remove this field.
 created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
 requires: <EIP number(s)> # Only required when you reference an EIP in the `Specification` section. Otherwise, remove this field.
@@ -24,7 +24,7 @@ requires: <EIP number(s)> # Only required when you reference an EIP in the `Spec
 
 ## Abstract
 
-A standard interface for Non-Fungible Asset Bound Tokens (NFABT/s), a subset of the more general Asset Bound Tokens (ABT/s).
+A standard interface for Non-Fungible PermaLink Asset Bound Tokens (PermaLink-ABT/s), a subset of the more general Asset Bound Tokens (ABT/s).
 
 The following standard allows for the implementation of a standard API for tokens within smart contracts and provides mirrored information of a specific smart contract through the ‘assetBoundContract’ function. Mirrored information consists of ‘ownerOf’, ‘tokenID’, ‘totalSupply’, as well as ‘balanceOf’. This in conjunction with blocking the ability to use basic transfer and approve functionality makes 2 tokens from different smart contracts interlocked. As the asset cannot be transferred in the traditional sense, being bound to a specific asset within a specific contract and maintaining corresponding information and movements creates an ABT. 
 
@@ -39,6 +39,34 @@ We considered ABTs being used by every individual who wishes to link an addition
 -->
 
 ## Motivation
+
+Currently, there is a limitation to traditional ownership models as only wallets or addresses can own blockchain assets. As digital identities, real-world assets (RWAs), and digital collectibles continue to grow, one common denominator emerges: smart contracts. While these contracts serve as the foundation for on-chain innovation, they are inherently static. Once deployed, they cannot be modified to accommodate evolving ideas, unforeseen use cases, or new integrations.
+
+During the development process, multiple use cases where a new ownership model would be beneficial were established;
+
+1. **The Case for On-Chain Identity:** Digital identity issuance is already taking shape worldwide, with nations like China, India, and Singapore leading the way. The EU, US, and others are also exploring digital passports, state IDs, and blockchain-based social security numbers. These identity frameworks require seamless linking to healthcare, driver's licenses, bank accounts, and voting registries.
+If each ID or registry exists as an isolated smart contract, users must manually track and transfer numerous tokens and credentials—a process prone to human error. A universal on-chain identity should enable assets to be bound together, allowing them to move as a unit rather than requiring manual migration. Asset Bound Tokens (ABTs) provide a framework for this, ensuring that identity-linked assets remain interconnected and dynamic.
+
+2. **Real-World Assets and Ownership Structure**: RWAs are gaining traction, from tokenized commodities like gold (e.g., BRICS-backed gold currency) to entire corporations and their underlying assets. Unlike static collectibles, companies actively buy, sell, and manage assets. A farming company acquiring new land or upgrading machinery, or an IT firm merging with another and inheriting IP, necessitates an ownership structure that reflects these changes.
+Currently, assets locked within smart contracts cannot be seamlessly transferred across contracts. ABTs address this by enabling hierarchical ownership structures where assets within a contract can be linked and updated as ownership evolves. This ensures businesses can efficiently manage assets on-chain without the constraints of rigid smart contracts.
+
+3. **Manufacturing and Inventory Management:** Manufacturing supply chains involve complex hierarchies: products are packed into boxes, which are placed on pallets, which are stored in containers. Each step requires precise tracking, from raw materials to final products reaching consumers. Immutable records on blockchain offer transparency, but the current model—creating individual smart contracts or repeatedly minting new tokens—is costly and inefficient.
+ABTs streamline inventory management by allowing dynamic asset binding. Instead of creating redundant smart contracts, manufacturers can link tokens representing various stages of the supply chain, maintaining historical data while ensuring seamless tracking and updates.
+
+4. **Addressing NFT Fragmentation:** NFTs have traditionally been associated with digital collectibles and art. However, many projects deploy secondary smart contracts to evolve their collections, inadvertently causing liquidity fragmentation. Owners often sell assets from the original collection to acquire newer ones, leading to value dilution and lower overall market confidence.
+ABTs solve this by allowing secondary collections to complement rather than compete with the original. Bound assets enhance the primary asset’s value without necessitating a separate, competing ecosystem. This structure retains liquidity within the original collection and sustains its market metrics, benefiting both creators and collectors.
+
+5. **New Opprutunites for Creators:** ABTs empower both asset owners and creators by enabling an open secondary market for existing tokens. Artists, for instance, can create and bind assets to existing NFTs without requiring permission from the original contract owner. This facilitates new revenue streams, such as artists being paid on consignment for augmenting or adding onto existing assets. Owners benefit as well, as additional assets increase the inherent value of their holdings, especially in instances of collaboration between established projects or reputable artists.
+
+In general, the concept of ABTs establishes a token standard where one token is bound to another by linking rather than direct ownership. If the binding token moves, all bound assets update accordingly, preserving structure without requiring manual transfers. This approach transforms smart contracts into dynamic, evolving repositories, ensuring long-term viability for digital identities, RWAs, and NFTs alike.
+
+Whether enhancing identity systems, optimizing supply chains, or fostering NFT innovation, ABTs introduce a flexible, future-proof ownership model that aligns with the ever-evolving nature of blockchain ecosystems. In the case of **PermaLink-ABTs**, these specifically focus on a permanent link between the ABT either another ABT or an NFT. This results in the supposed increase in the value of the binding token due to the addition of a new asset bound to it. This ABT version also helps if a user would like to move a whole portfolio of ABTs at once, reducing gas fees, as only the binding token has to be moved in order for all of the PermaLink ABTs to move with it.
+
+
+
+
+
+
 
 <!--
   This section is optional.
@@ -113,13 +141,7 @@ No backward compatibility issues found.
 
 ## Security Considerations
 
-<!--
-  All EIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. For example, include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. EIP submissions missing the "Security Considerations" section will be rejected. An EIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.
-
-  The current placeholder is acceptable for a draft.
-
-  TODO: Remove this comment before submitting
--->
+PermaLink-ABTs are linked to another non-fungible token. If an individual loses access to this token, what we call the binding token, they also lose access to all PermaLink-ABTs that have been bound to it. This is why we strongly recommend utilizing a standard such ERC-6809, a Non-Fungible Key Bound Token, because this token standard provides on-chain 2FA. This would secure all of the PermaLink-ABTs bound to the ERC-6809, and also allow a way to retrieve all of the tokens in case access to the wallet is lost or you’ve connected to a malicious site. In essence, as all of ERC-6809s security functionality carry of to all of the PermaLink-ABTs bound to it.
 
 Needs discussion.
 
