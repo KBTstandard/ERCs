@@ -1,6 +1,6 @@
 ---
-title: Non-Fungible PermaLink Asset Bound Token Standard
-description: An interface for Non-Fungible PermaLink Asset Bound Tokens, also known as a NFABT.
+title: PermaLink Asset Bound Token Standard
+description: An interface for PermaLink Asset Bound Tokens, also known as a PermaLink-ABTs.
 author: Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)
 discussions-to: <[URL](https://ethereum-magicians.org/t/non-fungible-asset-bound-token/23175)>
 status: Draft
@@ -24,7 +24,7 @@ requires: <EIP number(s)> # Only required when you reference an EIP in the `Spec
 
 ## Abstract
 
-A standard interface for Non-Fungible PermaLink Asset Bound Tokens (PermaLink-ABT/s), a subset of the more general Asset Bound Tokens (ABT/s).
+A standard interface for PermaLink Asset Bound Tokens (PermaLink-ABT/s), a subset of the more general Asset Bound Tokens (ABT/s).
 
 The following standard allows for the implementation of a standard API for tokens within smart contracts and provides mirrored information of a specific smart contract through the ‘assetBoundContract’ function. Mirrored information consists of ‘ownerOf’, ‘tokenID’, ‘totalSupply’, as well as ‘balanceOf’. This in conjunction with blocking the ability to use basic transfer and approve functionality makes 2 tokens from different smart contracts interlocked. As the asset cannot be transferred in the traditional sense, being bound to a specific asset within a specific contract and maintaining corresponding information and movements creates an ABT. 
 
