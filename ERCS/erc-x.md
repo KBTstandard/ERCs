@@ -1,6 +1,6 @@
 ---
 title: Non-Fungible PermaLink Asset Bound Token Standard
-description: An interface for Non-Fungible Asset Bound Tokens, also known as a NFABT.
+description: An interface for Non-Fungible PermaLink Asset Bound Tokens, also known as a NFABT.
 author: Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)
 discussions-to: <[URL](https://ethereum-magicians.org/t/non-fungible-asset-bound-token/23175)>
 status: Draft
