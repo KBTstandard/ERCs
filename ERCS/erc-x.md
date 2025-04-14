@@ -2,25 +2,13 @@
 title: PermaLink Asset Bound Token Standard
 description: An interface for PermaLink Asset Bound Tokens, also known as a PermaLink-ABTs.
 author: Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)
-discussions-to: <[URL](https://ethereum-magicians.org/t/non-fungible-asset-bound-token/23175)>
+discussions-to: https://ethereum-magicians.org/t/non-fungible-asset-bound-token/23175
 status: Draft
 type: Standards Track
-category: <Core, Networking, Interface, or ERC> # Only required for Standards Track. Otherwise, remove this field.
-created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
+category: ERC
+created: 2025-04-01
 requires: <EIP number(s)> # Only required when you reference an EIP in the `Specification` section. Otherwise, remove this field.
 ---
-
-<!--
-  READ EIP-1 (https://eips.ethereum.org/EIPS/eip-1) BEFORE USING THIS TEMPLATE!
-
-  This is the suggested template for new EIPs. After you have filled in the requisite fields, please delete these comments.
-
-  Note that an EIP number will be assigned by an editor. When opening a pull request to submit your EIP, please use an abbreviated title in the filename, `eip-draft_title_abbrev.md`.
-
-  The title should be 44 characters or less. It should not repeat the EIP number in title, irrespective of the category.
-
-  TODO: Remove this comment before submitting
--->
 
 ## Abstract
 
@@ -31,12 +19,6 @@ The following standard allows for the implementation of a standard API for token
 As the asset is bound to another asset having specified mirrored information, a ‘reveal’ function replaces the mint function commonly seen. The total supply of all the tokens from the ABT smart contract already exists.
 
 We considered ABTs being used by every individual who wishes to link an additional non-fungible asset to an already existing non-fungible asset. ABTs allow an infinite amount of tokens to be bound together, allowing them to work symbiotically rather than splintering and separating. Remaining interlocked and asset bound removes the idea that 2 smart contracts released by the same or different creators at the same or different times are competing with one another.
-
-<!--
-  The Abstract is a multi-sentence (short paragraph) technical summary. This should be a very terse and human-readable version of the specification section. Someone should be able to read only the abstract to get the gist of what this specification does.
-
-  TODO: Remove this comment before submitting
--->
 
 ## Motivation
 
@@ -68,14 +50,6 @@ Whether enhancing identity systems, optimizing supply chains, or fostering NFT i
 
 
 
-<!--
-  This section is optional.
-
-  The motivation section should include a description of any nontrivial problems the EIP solves. It should not describe how the EIP solves those problems, unless it is not immediately obvious. It should not describe why the EIP should be made into a standard, unless it is not immediately obvious.
-
-  With a few exceptions, external links are not allowed. If you feel that a particular resource would demonstrate a compelling case for your EIP, then save it as a printer-friendly PDF, put it in the assets folder, and link to that copy.
-
-  TODO: Remove this comment before submitting
 -->
 
 ## Specification
