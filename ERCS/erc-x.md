@@ -12,9 +12,9 @@ requires: <EIP number(s)> # Only required when you reference an EIP in the `Spec
 
 ### Abstract
 
-This standard introduces a subclass of tokens known as **PermaLink Asset Bound Tokens (PermaLink-ABTs)**—a specific implementation of the broader **Asset Bound Token (ABT)** concept. ABTs establish a novel ownership paradigm where **an asset can own another asset**, enabling composable, nested, and portfolio-like token structures that evolve together over time.
+This standard introduces a subclass of tokens known as **PermaLink Asset Bound Tokens (PermaLink-ABTs)** a specific implementation of the broader **Asset Bound Token (ABT)** concept. ABTs establish a novel ownership paradigm where **an asset can own another asset**, enabling composable, nested, and portfolio-like token structures that evolve together over time.
 
-PermaLink-ABTs implement a permanent binding mechanism where a token in one smart contract is irreversibly linked to a token in another contract. These links mirror key state data—such as `ownerOf`, `tokenId`, `totalSupply`, and `balanceOf`—using the `assetBoundContract` interface. Traditional token transfer and approval functions are disabled to enforce immutability and structural cohesion between bound assets.
+PermaLink-ABTs implement a permanent binding mechanism where a token in one smart contract is irreversibly linked to a token in another contract. These links mirror key state data—such as `ownerOf`, `tokenId`, `totalSupply`, and `balanceOf` using the `assetBoundContract` interface. Traditional token transfer and approval functions are disabled to enforce immutability and structural cohesion between bound assets.
 
 Instead of utilizing a `mint` function, PermaLink-ABTs employ a `reveal` mechanism that activates tokens from a predefined supply. This approach enables permissionless binding and significantly reduces gas costs. A single token can have multiple PermaLink-ABTs bound to it acting as multiple multiple subordinate assets, forming a unified, transferable unit that simplifies asset mobility across digital identities, NFTs, and real-world assets (RWAs).
 
@@ -114,7 +114,15 @@ No backward compatibility issues found.
 
 ## Security Considerations
 
-PermaLink-ABTs are linked to another non-fungible token. If an individual loses access to this token, what we call the binding token, they also lose access to all PermaLink-ABTs that have been bound to it. This is why we strongly recommend utilizing a standard such ERC-6809, a Non-Fungible Key Bound Token, because this token standard provides on-chain 2FA. This would secure all of the PermaLink-ABTs bound to the ERC-6809, and also allow a way to retrieve all of the tokens in case access to the wallet is lost or you’ve connected to a malicious site. In essence, as all of ERC-6809s security functionality carry of to all of the PermaLink-ABTs bound to it.
+## Security Considerations
+
+PermaLink-ABTs are linked to another non-fungible token. If an individual loses access to this token—what we call the **binding token**—they also lose access to all PermaLink-ABTs that have been bound to it. This introduces a critical security consideration: the entire value of bound assets depends on the integrity and availability of the binding token.
+
+To mitigate this risk, we strongly recommend the use of standards like [ERC-6809](https://eips.ethereum.org/EIPS/eip-6809), a **Non-Fungible Key Bound Token**, which introduces on-chain two-factor authentication (2FA). ERC-6809 allows a user to bind sensitive tokens (like PermaLink-ABTs) to a secured identity layer, complete with recovery mechanisms. In the event that a user loses access to their original wallet or interacts with a malicious contract, ERC-6809 provides a safeFallback to re-establish control.
+
+In essence, all of the security guarantees of ERC-6809 extend to any PermaLink-ABTs bound to it. This layered security model not only protects against loss but also ensures recoverability and long-term viability for high-value bound assets. It is strongly encouraged that developers implementing PermaLink-ABTs integrate this or similar standards to provide a robust security foundation for users.
+
+
 
 Needs discussion.
 
