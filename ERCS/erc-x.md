@@ -138,15 +138,13 @@ contract ABT is ERC721Enumerable, Ownable, IABT {
 
 ## Rationale
 
-<!--
-  The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages.
+The design of PermaLink-ABTs centers around the goal of enabling permanent token binding while optimizing for gas efficiency, composability, and secure ownership structures. We chose to implement a `reveal` function in place of a traditional `mint` function to reduce gas costs and simplify on-chain state changes. Unlike minting, which creates tokens at runtime and incurs higher gas fees, the `reveal` function maps pre-allocated tokens stored in an array or mapping. This allows tokens to be activated on demand without the overhead of dynamic token creation. As a result, token issuers can prepare and store an entire supply in advance, with users later revealing and binding tokens when needed. This approach aligns with the use case of portfolio binding and asset hierarchies, where large numbers of tokens may need to be activated and bound efficiently. 
 
-  The current placeholder is acceptable for a draft.
+We adopted the `assetBoundContract` interface to mirror essential metadata such as `ownerOf`, `tokenId`, `totalSupply`, and `balanceOf` from the binding token’s contract. This ensures that PermaLink-ABTs remain synchronized with the asset they are bound to, without duplicating logic or requiring manual updates. The mirroring also ensures traceability and visibility across contracts, allowing observers and off-chain systems to reliably interpret the token relationship. To preserve the permanent nature of the bond, standard `transfer` and `approve` methods are disabled. This immutability guarantees that PermaLink-ABTs cannot be separated from their bound asset once revealed. If the primary token moves, all attached PermaLink-ABTs move with it. This behavior supports composability, value aggregation, and consistent ownership logic.
 
-  TODO: Remove this comment before submitting
--->
+An alternative considered was allowing flexible transfer mechanics via opt-in transfer functions or whitelisting. However, this introduced unnecessary complexity and undermined the core principle of permanence. It also increased the risk of token desynchronization, accidental fragmentation, and security vulnerabilities in contract implementations. By contrast, the current design provides a simpler and more robust foundation.
 
-TBD
+PermaLink-ABTs enforce strict one-way binding with immutable relationships, making them especially suitable for use cases like identity systems, real-world asset (RWA) structures, and portfolio-locked NFTs. They act as permanently attached extensions to existing tokens, reducing complexity and avoiding redundant contract logic. This approach also provides a cleaner and more secure way to augment existing assets while maintaining compatibility across various blockchain use cases. This standard is intentionally minimal to ensure wide compatibility and flexibility. Developers can extend the base logic for specialized use cases, such as embedding royalty splits, upgrade paths, or linking to dynamic data feeds, without altering the underlying PermaLink mechanism.
 
 ## Backwards Compatibility
 
