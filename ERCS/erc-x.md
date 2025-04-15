@@ -112,8 +112,6 @@ No backward compatibility issues found.
 
 ## Security Considerations
 
-## Security Considerations
-
 PermaLink-ABTs are linked to another non-fungible token. If an individual loses access to this token—what we call the **binding token**—they also lose access to all PermaLink-ABTs that have been bound to it. This introduces a critical security consideration: the entire value of bound assets depends on the integrity and availability of the binding token.
 
 To mitigate this risk, we strongly recommend the use of standards like [ERC-6809](https://eips.ethereum.org/EIPS/eip-6809), a **Non-Fungible Key Bound Token**, which introduces on-chain two-factor authentication (2FA). ERC-6809 allows a user to bind sensitive tokens (like PermaLink-ABTs) to a secured identity layer, complete with recovery mechanisms. In the event that a user loses access to their original wallet or interacts with a malicious contract, ERC-6809 provides a safeFallback to re-establish control.
