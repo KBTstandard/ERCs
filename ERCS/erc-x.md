@@ -62,6 +62,8 @@ PermaLink-ABTs consolidate asset value by allowing multiple subordinate tokens t
 interface IABT {
     function ownerOf(uint256 tokenId) external view returns (address);
     function tokenExists(uint256 tokenId) external view returns (bool);
+    function totalSupply() external view returns (uint256);
+    function balanceOf(address owner) external view returns (uint256);
 }
 ```
 
@@ -134,6 +136,42 @@ contract ABT is ERC721Enumerable, Ownable, IABT {
         revert("ABT: Transfers not allowed");
     }
 }
+```
+
+### **Interface functions**
+
+The functions detailed below MUST be implemented.
+
+#### `ownerOf` function
+
+Returns the owner of the NFT specified by the `tokenId`. Will read from the `assetBoundContract` the owner and return it.
+
+```solidity
+function ownerOf(uint256 tokenId) external view returns (address);
+```
+
+#### `tokenExists` function
+
+Returns true if the owner of the token is not the zero address (`0x0`)
+
+```solidity
+function tokenExists(uint256 tokenId) external view returns (bool);
+```
+
+#### `totalSupply` function
+
+Gets the total amount of tokens stored by the assetBoundContract
+
+```solidity
+function totalSupply() external view returns (uint256);
+```
+
+#### `balanceOf` function
+
+Returns the number of NFTs in the assetBoundContract that an owner has.
+
+```solidity
+function balanceOf(address owner) external view returns (uint256);
 ```
 
 ## Rationale
