@@ -51,15 +51,90 @@ PermaLink-ABTs consolidate asset value by allowing multiple subordinate tokens t
 
 ## Specification
 
-<!--
-  The Specification section should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (besu, erigon, ethereumjs, go-ethereum, nethermind, or others).
+### `IABT` (Token Interface)
 
-  It is recommended to follow RFC 2119 and RFC 8170. Do not remove the key word definitions if RFC 2119 and RFC 8170 are followed.
+**NOTES**:
 
-  TODO: Remove this comment before submitting
--->
+- The following specifications use syntax from Solidity `0.8.27` (or above)
+- Callers MUST handle `false` from `returns (bool success)`. Callers MUST NOT assume that `false` is never returned!
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119 and RFC 8174.
+```solidity
+interface IABT {
+    function ownerOf(uint256 tokenId) external view returns (address);
+    function tokenExists(uint256 tokenId) external view returns (bool);
+}
+```
+
+### `ABT` (Token Contract)
+```solidity
+contract ABT is ERC721Enumerable, Ownable, IABT {
+    ERC721Enumerable public assetBoundContract;
+
+    constructor(
+        address _assetBoundContract,
+        string memory _name,
+        string memory _symbol
+    ) ERC721(_name, _symbol) {
+        assetBoundContract = ERC721Enumerable(_assetBoundContract);
+    }
+
+    function ownerOf(
+        uint256 tokenId
+    ) public view override(ERC721, IABT, IERC721) returns (address) {
+        return assetBoundContract.ownerOf(tokenId);
+    }
+
+    function tokenExists(uint256 tokenId) public view returns (bool) {
+        return assetBoundContract.ownerOf(tokenId) != address(0);
+    }
+
+    function totalSupply() public view override returns (uint256) {
+        return assetBoundContract.totalSupply();
+    }
+
+    function balanceOf(
+        address owner
+    ) public view override(ERC721, IERC721) returns (uint256) {
+        return assetBoundContract.balanceOf(owner);
+    }
+
+    function approve(address, uint256) public pure override(ERC721, IERC721) {
+        revert("ABT: Approvals not allowed");
+    }
+
+    function setApprovalForAll(
+        address,
+        bool
+    ) public pure override(ERC721, IERC721) {
+        revert("ABT: Approvals not allowed");
+    }
+
+    function transferFrom(
+        address,
+        address,
+        uint256
+    ) public pure override(ERC721, IERC721) {
+        revert("ABT: Transfers not allowed");
+    }
+
+    function safeTransferFrom(
+        address,
+        address,
+        uint256
+    ) public pure override(ERC721, IERC721) {
+        revert("ABT: Transfers not allowed");
+    }
+
+    function safeTransferFrom(
+        address,
+        address,
+        uint256,
+        bytes memory
+    ) public pure override(ERC721, IERC721) {
+        revert("ABT: Transfers not allowed");
+    }
+}
+```
 
 ## Rationale
 
