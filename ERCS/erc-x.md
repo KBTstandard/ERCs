@@ -39,7 +39,7 @@ This standard proposes **Asset Bound Tokens (ABTs)** as a solution to this chall
 4. **NFT Ecosystem Optimization**  
  NFT projects often expand by launching secondary collections (e.g., additional editions, special releases). Without ABTs, this leads to fragmented value and user confusion as older and newer assets compete. ABTs allow new NFTs to be bound to originals, enhancing their value while maintaining a unified ecosystem. This strengthens liquidity and preserves market metrics, ensuring that the value of the original collection is retained and supported by the newer assets, thus benefiting both creators and collectors.
 
-   5. **New Opportunities for Creators**  
+5. **New Opportunities for Creators**  
    ABTs empower creators to build on top of existing assets permissionlessly—without needing ownership of or permission from the original smart contract. This enables a new wave of creative expression, where artists can augment and enhance NFTs (e.g., adding new visuals, audio, or interactive layers) and collaborate on existing collections. Such contributions can generate new revenue streams through shared royalties, consignment, or collaborative upgrades. Owners benefit as well, since bound enhancements can increase the inherent value of their holdings, particularly in projects involving established creators or cross-collection collaborations.
 
 In essence, ABTs introduce a framework where tokens are linked rather than owned. This allows for dynamic and evolving asset systems, where assets move together in harmony. If a binding token moves, all associated ABTs move with it, ensuring seamless updates and reducing the need for manual transfers. This innovation transforms traditional smart contracts from static repositories into living, evolving systems capable of adapting to changing use cases, technologies, and business models.
@@ -48,8 +48,6 @@ The **PermaLink-ABTs** implementation takes the ABT model further by enforcing a
 
 PermaLink-ABTs consolidate asset value by allowing multiple subordinate tokens to be linked to a single binding token, providing enhanced composability and reducing fragmentation. By requiring only the binding token to be transferred, all associated assets move in sync, making it easier to manage portfolios and move groups of assets together. This approach fosters collaboration, value accrual, and compatibility across ecosystems, whether for digital identities, RWAs, NFTs, or other on-chain assets.
 
-
--->
 
 ## Specification
 
