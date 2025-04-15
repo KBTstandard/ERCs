@@ -7,7 +7,7 @@ status: Draft
 type: Standards Track
 category: ERC
 created: 2025-04-01
-requires: <EIP number(s)> # Only required when you reference an EIP in the `Specification` section. Otherwise, remove this field.
+requires: 721
 ---
 
 ### Abstract
