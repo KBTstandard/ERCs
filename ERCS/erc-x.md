@@ -14,7 +14,7 @@ requires: 721
 
 This standard introduces a subclass of tokens known as **PermaLink Asset Bound Tokens (PermaLink-ABTs)** a specific implementation of the broader **Asset Bound Token (ABT)** concept. ABTs establish a novel ownership paradigm where **an asset can own another asset**, enabling composable, nested, and portfolio-like token structures that evolve together over time.
 
-PermaLink-ABTs implement a permanent binding mechanism where a token in one smart contract is irreversibly linked to a token in another contract. These links mirror key state data—such as `ownerOf`, `tokenId`, `totalSupply`, and `balanceOf` using the `assetBoundContract` interface. Traditional token transfer and approval functions are disabled to enforce immutability and structural cohesion between bound assets.
+PermaLink-ABTs implement a permanent binding mechanism where a token in one smart contract is irreversibly linked to a token in another contract. These links mirror key state data such as `ownerOf`, `tokenId`, `totalSupply`, and `balanceOf` using the `assetBoundContract` interface. Traditional token transfer and approval functions are disabled to enforce immutability and structural cohesion between bound assets.
 
 Instead of utilizing a `mint` function, PermaLink-ABTs employ a `reveal` mechanism that activates tokens from a predefined supply. This approach enables permissionless binding and significantly reduces gas costs. A single token can have multiple PermaLink-ABTs bound to it acting as multiple multiple subordinate assets, forming a unified, transferable unit that simplifies asset mobility across digital identities, NFTs, and real-world assets (RWAs).
 
