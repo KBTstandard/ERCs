@@ -61,82 +61,34 @@ PermaLink-ABTs consolidate asset value by allowing multiple subordinate tokens t
 
 ```solidity
 interface IABT {
+    event AssetBoundContractSet(address assetBoundContract);
+    event TokenRevealed(uint256 tokenId);
+
     function ownerOf(uint256 tokenId) external view returns (address);
     function tokenExists(uint256 tokenId) external view returns (bool);
     function totalSupply() external view returns (uint256);
     function balanceOf(address owner) external view returns (uint256);
+
+    function reveal(uint256[] calldata tokenIds) external payable;
 }
 ```
 
-### `ABT` (Token Contract)
+### **Interface events**
+
+#### `AssetBoundContractSet` event
+
+Emitted when the contract is deployed and bonded to `assetBoundContract`
+
 ```solidity
-contract ABT is ERC721Enumerable, Ownable, IABT {
-    ERC721Enumerable public assetBoundContract;
+event AssetBoundContractSet(address assetBoundContract);
+```
 
-    constructor(
-        address _assetBoundContract,
-        string memory _name,
-        string memory _symbol
-    ) ERC721(_name, _symbol) {
-        assetBoundContract = ERC721Enumerable(_assetBoundContract);
-    }
+#### `TokenRevealed` event
 
-    function ownerOf(
-        uint256 tokenId
-    ) public view override(ERC721, IABT, IERC721) returns (address) {
-        return assetBoundContract.ownerOf(tokenId);
-    }
+Emitted when the `tokenId` is revealed
 
-    function tokenExists(uint256 tokenId) public view returns (bool) {
-        return assetBoundContract.ownerOf(tokenId) != address(0);
-    }
-
-    function totalSupply() public view override returns (uint256) {
-        return assetBoundContract.totalSupply();
-    }
-
-    function balanceOf(
-        address owner
-    ) public view override(ERC721, IERC721) returns (uint256) {
-        return assetBoundContract.balanceOf(owner);
-    }
-
-    function approve(address, uint256) public pure override(ERC721, IERC721) {
-        revert("ABT: Approvals not allowed");
-    }
-
-    function setApprovalForAll(
-        address,
-        bool
-    ) public pure override(ERC721, IERC721) {
-        revert("ABT: Approvals not allowed");
-    }
-
-    function transferFrom(
-        address,
-        address,
-        uint256
-    ) public pure override(ERC721, IERC721) {
-        revert("ABT: Transfers not allowed");
-    }
-
-    function safeTransferFrom(
-        address,
-        address,
-        uint256
-    ) public pure override(ERC721, IERC721) {
-        revert("ABT: Transfers not allowed");
-    }
-
-    function safeTransferFrom(
-        address,
-        address,
-        uint256,
-        bytes memory
-    ) public pure override(ERC721, IERC721) {
-        revert("ABT: Transfers not allowed");
-    }
-}
+```solidity
+event TokenRevealed(uint256 tokenId);
 ```
 
 ### **Interface functions**
@@ -175,21 +127,13 @@ Returns the number of NFTs in the assetBoundContract that an owner has.
 function balanceOf(address owner) external view returns (uint256);
 ```
 
-### Optional: `reveal` function
+### `reveal` function
 
 An optional `reveal` function MAY be implemented to allow pre-allocated tokens to be activated on demand.  
 This method reduces gas consumption compared to traditional minting and simplifies token activation mechanics.
 
 ```solidity
-function reveal(uint256 tokenId, address to) external;
-```
-
-###  Revealed Event
-
-Emitted when a token is successfully revealed and assigned to an address.
-
-```solidity
-event Revealed(address indexed to, uint256 indexed tokenId);
+function reveal(uint256[] calldata tokenIds) external payable;
 ```
 
 ## Rationale
