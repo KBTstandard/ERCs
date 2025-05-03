@@ -77,7 +77,7 @@ interface IABT {
 
 #### `AssetBoundContractSet` event
 
-Emitted when the contract is deployed and bonded to `assetBoundContract`
+Emitted when the contract is deployed and binded to `assetBoundContract`
 
 ```solidity
 event AssetBoundContractSet(address assetBoundContract);
